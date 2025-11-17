@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOBILON - What is Mobilon?</title>
+    <title>MOBILON - High-Energy Event Brand</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="fade-in">
@@ -12,81 +12,102 @@
     <video class="bg-video" autoplay loop muted playsinline>
         <source src="bg1.mp4" type="video/mp4">
     </video>
-    <!-- DRAGON GIF FLYING LEFT TO RIGHT -->
-    <img src="dragon.gif" class="dragon">
-
+    
+    <!-- Dragon Animation -->
+    <video class="dragon" autoplay loop muted playsinline>
+        <source src="dragon.mp4" type="video/mp4">
+    </video>
 
     <!-- Fire Background Animation -->
     <div class="fire-bg" id="fireBackground"></div>
-
     
-    <!-- BOTTOM LEFT LOGO -->
-    <img src="Group 14.png" class="corner-logo bottom-left" onclick="gotoEvents()">
+    
 
-    <!-- BOTTOM RIGHT LOGO -->
-    <img src="Group 14.png" class="corner-logo bottom-right"onclick="gotoEvents()">
+    <!-- Bottom Logos -->
+    <img src="Group 14.png" class="corner-logo bottom-left">
+    <img src="Group 14.png" class="corner-logo bottom-right">
 
+    <!-- Home Section -->
+    <section id="home">
+        <div class="home-container">
+            <h1 class="home-title">WHAT IS MOBILON?</h1>
 
-    <!-- Page Content -->
-    <section class="page1-container">
+            <div class="scroll-box">
+                <p>
+                    Mobilon is a high-energy, next-generation event brand combining power,
+                    creativity, technology, and culture. It represents movement, ambition, 
+                    and unstoppable growth. Mobilon stands for fire, motion, and evolution.
+                    <br><br>
+                    It is built to create unforgettable experiences—through events, music,
+                    visuals, and digital innovation.  
+                    <br><br>  
+                    Scroll down to explore our events and office.
+                </p>
+            </div>
 
-        <h1 class="title">WHAT IS MOBILON?</h1>
-
-        <div class="scroll-box">
-            <p>
-                Mobilon is a high-energy, next-generation event brand combining power,
-                creativity, technology, and culture. It represents movement, ambition, 
-                and unstoppable growth. Mobilon stands for fire, motion, and evolution.
-                <br><br>
-                It is built to create unforgettable experiences—through events, music,
-                visuals, and digital innovation.  
-                <br><br>  
-                Scroll and explore. Then move ahead to view the events.
-            </p>
+            <div class="scroll-indicator">▼</div>
         </div>
-
-        <!-- Arrow -->
-        <div class="next-arrow" onclick="gotoEvents()">➤</div>
-
     </section>
 
-<script>
-function gotoEvents() {
-    document.body.classList.add("fade-out");
-    setTimeout(() => {
-        window.location.href = "events.html";
-    }, 800);
-}
+    <!-- Events Section -->
+    <section id="events">
+        <div class="events-wrapper">
+            <h1 class="events-title">Mobilon Events</h1>
 
-// Create fire particles for background
-function createFireParticles() {
-    const fireBg = document.getElementById('fireBackground');
-    const particleCount = 25;
-    
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.classList.add('fire-particle');
-        
-        // Random properties
-        const size = Math.random() * 100 + 30;
-        const left = Math.random() * 100;
-        const duration = Math.random() * 4 + 4;
-        const delay = Math.random() * 8;
-        
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${left}%`;
-        particle.style.animationDuration = `${duration}s`;
-        particle.style.animationDelay = `${delay}s`;
-        
-        fireBg.appendChild(particle);
-    }
-}
+            <div class="events-grid">
+                <!-- Event 1 -->
+                <div class="event-box">
+                    <div class="flame-bg"></div>
+                    <img src="event1.jpg" class="event-img">
+                    <h2>Event 1</h2>
+                    <p>Full description for event one with hell-style details.</p>
+                </div>
 
-// Initialize fire particles
-window.addEventListener('load', createFireParticles);
-</script>
+                <!-- Event 2 -->
+                <div class="event-box mix-up">
+                    <div class="flame-bg"></div>
+                    <img src="event2.jpg" class="event-img">
+                    <h2>Event 2</h2>
+                    <p>Full description for event two with extreme flame style.</p>
+                </div>
 
+                <!-- Event 3 -->
+                <div class="event-box">
+                    <div class="flame-bg"></div>
+                    <img src="event3.jpg" class="event-img">
+                    <h2>Event 3</h2>
+                    <p>Full description for event three all fire effects applied.</p>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="event-box mix-down">
+                    <div class="flame-bg"></div>
+                    <img src="event4.jpg" class="event-img">
+                    <h2>Event 4</h2>
+                    <p>Full description for event four, pure fire universe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Section -->
+    <section id="office">
+        <div class="circular-photos">
+            <h2>Office</h2>
+            <div class="circle-container">
+                <div class="circle-photo">
+                    <img src="photo1.jpg" alt="Office Photo 1">
+                </div>
+                <div class="circle-photo">
+                    <img src="photo2.jpg" alt="Office Photo 2">
+                </div>
+                <div class="circle-photo">
+                    <img src="photo3.jpg" alt="Office Photo 3">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
