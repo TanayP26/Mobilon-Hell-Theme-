@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOBILON - What is Mobilon?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="fade-in">
+
+    <!-- Background Video -->
+    <video class="bg-video" autoplay loop muted playsinline>
+        <source src="bg1.mp4" type="video/mp4">
+    </video>
+    <!-- DRAGON ANIMATION BACKGROUND -->
+    <video class="dragon" autoplay loop muted playsinline>
+        <source src="dragon.mp4" type="video/mp4">
+    </video>
+
+    <!-- Fire Background Animation -->
+    <div class="fire-bg" id="fireBackground"></div>
+
+    
+    <!-- BOTTOM LEFT LOGO -->
+    <img src="Group 14.png" class="corner-logo bottom-left" onclick="gotoEvents()">
+
+    <!-- BOTTOM RIGHT LOGO -->
+    <img src="Group 14.png" class="corner-logo bottom-right"onclick="gotoEvents()">
+
+
+    <!-- Page Content -->
+    <section class="page1-container">
+
+        <h1 class="title">WHAT IS MOBILON?</h1>
+
+        <div class="scroll-box">
+            <p>
+                Mobilon is a high-energy, next-generation event brand combining power,
+                creativity, technology, and culture. It represents movement, ambition, 
+                and unstoppable growth. Mobilon stands for fire, motion, and evolution.
+                <br><br>
+                It is built to create unforgettable experiences—through events, music,
+                visuals, and digital innovation.  
+                <br><br>  
+                Scroll and explore. Then move ahead to view the events.
+            </p>
+        </div>
+
+        <!-- Arrow -->
+        <div class="next-arrow" onclick="gotoEvents()">➤</div>
+
+    </section>
+
+<script>
+function gotoEvents() {
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+        window.location.href = "events.html";
+    }, 800);
+}
+
+// Create fire particles for background
+function createFireParticles() {
+    const fireBg = document.getElementById('fireBackground');
+    const particleCount = 25;
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('fire-particle');
+        
+        // Random properties
+        const size = Math.random() * 100 + 30;
+        const left = Math.random() * 100;
+        const duration = Math.random() * 4 + 4;
+        const delay = Math.random() * 8;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        fireBg.appendChild(particle);
+    }
+}
+
+// Initialize fire particles
+window.addEventListener('load', createFireParticles);
+</script>
+
+</body>
+</html>

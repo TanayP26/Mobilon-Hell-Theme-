@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobilon Events</title>
+  <style>
+    /* Global styles */
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      background: black;
+      color: white;
+      font-family: Arial, sans-serif;
+      animation: fadeIn 1s ease forwards;
+      opacity: 0;
+    }
+
+    /* Fade animations */
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    /* Background Video */
+    .bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    /* Fire background animation */
+    .fire-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .fire-particle {
+      position: absolute;
+      bottom: -50px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 100, 0, 0.8) 0%, rgba(255, 50, 0, 0.4) 30%, transparent 70%);
+      animation: fireFloat linear infinite;
+    }
+
+    @keyframes fireFloat {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+      }
+    }
+
+    /* Header logo */
+    .header {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 20;
+      cursor: pointer;
+    }
+
+    .header-logo {
+      font-size: 2.2rem;
+      font-weight: bold;
+      color: #ff3c00;
+      text-shadow: 0 0 15px red;
+      letter-spacing: 3px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Wrapping container */
+    .events-wrapper {
+      padding: 120px 30px 40px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .events-title {
+      font-size: 3rem;
+      text-align: center;
+      color: #ff3c00;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 0 0 15px #ff1500;
+    }
+
+    /* Events grid */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 35px;
+      margin-bottom: 80px;
+    }
+
+    /* Event cards */
+    .event-box {
+      position: relative;
+      padding: 20px;
+      border-radius: 16px;
+      background: rgba(30, 0, 0, 0.55);
+      border: 2px solid rgba(255, 60, 0, 0.6);
+      box-shadow: 0 0 20px rgba(255, 80, 0, 0.5);
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Flame effect layer */
+    .flame-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at bottom,
+        rgba(255, 80, 0, 0.75),
+        rgba(255, 0, 0, 0.4),
+        rgba(0, 0, 255, 0.25),
+        transparent 70%
+      );
+      filter: blur(35px);
+      animation: flameMove 2.6s infinite ease-in-out alternate;
+      z-index: -1;
+    }
+
+    @keyframes flameMove {
+      0% { transform: translateY(10px) scale(1); opacity: 0.6; }
+      100% { transform: translateY(-20px) scale(1.1); opacity: 1; }
+    }
+
+    /* Event image */
+    .event-img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 20px rgba(255, 80, 0, 0.5);
+    }
+
+    .event-box h2 {
+      color: #ffd9c6;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+      font-size: 1.7rem;
+    }
+
+    .event-box p {
+      color: #ffe6d8;
+      line-height: 1.5rem;
+      font-size: 1rem;
+    }
+
+    /* Mixed layout stagger */
+    .mix-up { transform: translateY(-20px); }
+    .mix-down { transform: translateY(20px); }
+
+    /* Circular photos section */
+    .circular-photos {
+      padding: 60px 20px;
+      text-align: center;
+      background: rgba(10, 0, 0, 0.7);
+      border-top: 2px solid rgba(255, 60, 0, 0.6);
+      box-shadow: 0 -10px 30px rgba(255, 60, 0, 0.3);
+    }
+
+    .circular-photos h2 {
+      font-size: 2.5rem;
+      color: #ff3c00;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px #ff1500;
+    }
+
+    .circle-container {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .circle-photo {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      border: 3px solid #ff3c00;
+      box-shadow: 0 0 25px rgba(255, 60, 0, 0.7);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .circle-photo:nth-child(2) {
+      animation-delay: 1.3s;
+    }
+
+    .circle-photo:nth-child(3) {
+      animation-delay: 2.6s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+
+    .circle-photo:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 35px rgba(255, 100, 0, 0.9);
+    }
+
+    .circle-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .circle-photo::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, transparent 40%, rgba(255, 60, 0, 0.2) 100%);
+      border-radius: 50%;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .events-grid {
+        grid-template-columns: 1fr;
+      }
+      .mix-up, .mix-down {
+        transform: none;
+      }
+      
+      .circle-container {
+        gap: 30px;
+      }
+      
+      .circle-photo {
+        width: 140px;
+        height: 140px;
+      }
+    }
+    /* ----------------------------------
+    DRAGON FLYING BACKGROUND ANIMATION
+    ----------------------------------- */
+
+    .dragon {
+        position: fixed;
+        top: 20%;
+        left: -40%;                /* Starts off-screen left */
+        width: 380px;              /* Size of dragon */
+        height: auto;
+        z-index: -1;               /* Behind everything */
+        filter: brightness(1.4) drop-shadow(0 0 25px red);
+        animation: dragonFly 12s linear infinite;
+        pointer-events: none;
+        mix-blend-mode: screen;    /* Makes fire blend with background */
+    }
+
+    /* Dragon movement path */
+    @keyframes dragonFly {
+        0% {
+            transform: translateX(0) scale(1);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        50% {
+            transform: translateX(160vw) scale(1.15);
+            opacity: 1;
+        }
+        90% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(200vw) scale(1.15);
+            opacity: 0;
+        }
+    }
+
+  </style>
+</head>
+
+<body>
+
+    <!-- Background Video -->
+    <video class="bg-video" autoplay loop muted playsinline>
+        <source src="your-video-2.mp4" type="video/mp4">
+    </video>
+    <!-- DRAGON ANIMATION BACKGROUND -->
+    <video class="dragon" autoplay loop muted playsinline>
+        <source src="dragon.mp4" type="video/mp4">
+    </video>
+
+
+    <!-- Fire Background Animation -->
+    <div class="fire-bg" id="fireBackground"></div>
+
+    <!-- Header Logo -->
+    <div class="header" onclick="goHome()">
+        <div class="header-logo">MOBILON</div>
+    </div>
+
+    <!-- Events Content -->
+    <div class="events-wrapper">
+        <h1 class="events-title">Mobilon Events</h1>
+
+        <div class="events-grid">
+
+        <!-- Event 1 -->
+        <div class="event-box">
+            <div class="flame-bg"></div>
+            <img src="event1.jpg" class="event-img">
+            <h2>Event 1</h2>
+            <p>Full description for event one with hell-style details.</p>
+        </div>
+
+        <!-- Event 2 -->
+        <div class="event-box mix-up">
+            <div class="flame-bg"></div>
+            <img src="event2.jpg" class="event-img">
+            <h2>Event 2</h2>
+            <p>Full description for event two with extreme flame style.</p>
+        </div>
+
+        <!-- Event 3 -->
+        <div class="event-box">
+            <div class="flame-bg"></div>
+            <img src="event3.jpg" class="event-img">
+            <h2>Event 3</h2>
+            <p>Full description for event three all fire effects applied.</p>
+        </div>
+
+        <!-- Event 4 -->
+        <div class="event-box mix-down">
+            <div class="flame-bg"></div>
+            <img src="event4.jpg" class="event-img">
+            <h2>Event 4</h2>
+            <p>Full description for event four, pure fire universe.</p>
+        </div>
+
+        </div>
+    </div>
+
+    <!-- Circular Photos Section -->
+    <div class="circular-photos">
+        <h2>Office</h2>
+        <div class="circle-container">
+        <div class="circle-photo">
+            <img src="photo1.jpg" alt="Event Moment 1">
+        </div>
+
+        <div class="circle-photo">
+            <img src="photo2.jpg" alt="Event Moment 2">
+        </div>
+        <div class="circle-photo">
+            <img src="photo3.jpg" alt="Event Moment 3">
+        </div>
+        </div>
+    </div>
+
+  <script>
+    function goHome() {
+      document.body.style.animation = 'fadeOut 1s ease forwards';
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 900);
+    }
+
+    // Create fire particles for background
+    function createFireParticles() {
+      const fireBg = document.getElementById('fireBackground');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('fire-particle');
+        
+        // Random properties
+        const size = Math.random() * 120 + 40;
+        const left = Math.random() * 100;
+        const duration = Math.random() * 5 + 5;
+        const delay = Math.random() * 10;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${left}%`;
+        particle.style.animationDuration = `${duration}s`;
+        particle.style.animationDelay = `${delay}s`;
+        
+        fireBg.appendChild(particle);
+      }
+    }
+    
+    // Initialize fire particles
+    window.addEventListener('load', createFireParticles);
+  </script>
+
+</body>
+</html>

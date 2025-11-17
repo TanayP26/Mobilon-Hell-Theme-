@@ -1,0 +1,186 @@
+/* -------------------------
+   GLOBAL
+-------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    background: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Fade Animation */
+.fade-in { animation: fadeIn 0.8s ease forwards; }
+.fade-out { animation: fadeOut 0.8s ease forwards; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* Background Video */
+.bg-video {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2;
+}
+
+/* Fire Background Animation */
+.fire-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.fire-particle {
+    position: absolute;
+    bottom: -50px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 100, 0, 0.8) 0%, rgba(255, 50, 0, 0.4) 30%, transparent 70%);
+    animation: fireFloat linear infinite;
+}
+
+@keyframes fireFloat {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* -------------------------
+   PAGE 1 (What is Mobilon)
+-------------------------- */
+
+.page1-container {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    padding-top: 10vh;
+}
+
+.title {
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px red;
+}
+
+/* Scrollable box */
+.scroll-box {
+    width: 80%;
+    height: 40vh;
+    margin: 30px auto;
+    padding: 20px;
+    overflow-y: auto;
+    border: 3px solid rgba(255, 80, 80, 0.8);
+    backdrop-filter: blur(4px);
+    background: rgba(20, 0, 0, 0.4);
+    box-shadow: 0 0 20px red inset;
+}
+
+/* Arrow */
+.next-arrow {
+    margin-top: 30px;
+    font-size: 60px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-shadow: 0 0 25px orange;
+}
+
+.next-arrow:hover {
+    transform: scale(1.2);
+}
+
+/* Logo */
+.logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+    padding: 10px 18px;
+    border: 2px solid red;
+    background: rgba(0,0,0,0.5);
+    text-shadow: 0 0 20px red;
+    transition: 0.3s;
+}
+.logo:hover {
+    transform: scale(1.1);
+}
+/* -------------------------
+   BOTTOM CORNER LOGOS
+-------------------------- */
+.corner-logo {
+    position: fixed;
+    width: 120px;
+    height: auto;
+    z-index: 20;
+    filter: drop-shadow(0 0 20px red) drop-shadow(0 0 40px orange);
+    animation: flamePulse 2.2s infinite ease-in-out;
+}
+
+.bottom-left {
+    bottom: 20px;
+    left: 20px;
+}
+
+.bottom-right {
+    bottom: 20px;
+    right: 20px;
+}
+
+@keyframes flamePulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 15px red); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 40px orange); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 15px red); }
+}
+/* ----------------------------------
+   DRAGON FLYING BACKGROUND ANIMATION
+----------------------------------- */
+
+.dragon {
+    position: fixed;
+    top: 20%;
+    left: -40%;                /* Starts off-screen left */
+    width: 380px;              /* Size of dragon */
+    height: auto;
+    z-index: -1;               /* Behind everything */
+    filter: brightness(1.4) drop-shadow(0 0 25px red);
+    animation: dragonFly 12s linear infinite;
+    pointer-events: none;
+    mix-blend-mode: screen;    /* Makes fire blend with background */
+}
+
+/* Dragon movement path */
+@keyframes dragonFly {
+    0% {
+        transform: translateX(0) scale(1);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(160vw) scale(1.15);
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(200vw) scale(1.15);
+        opacity: 0;
+    }
+}
