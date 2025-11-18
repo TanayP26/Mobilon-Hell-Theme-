@@ -11,7 +11,6 @@ body {
     overflow-x: hidden;
     background: black;
     color: white;
-    font-family: Arial, sans-serif;
     scroll-behavior: smooth;
 }
 
@@ -45,14 +44,14 @@ section {
 }
 
 /* -------------------------
-   COMBINED BACKGROUND
+   COMBINED BACKGROUND - UPDATED
 -------------------------- */
 .background-combined {
-    position: fixed;
+    position: absolute; /* Changed from fixed to absolute */
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: -10;
     pointer-events: none;
     overflow: hidden;
@@ -77,16 +76,18 @@ section {
 }
 
 .bg-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position:relative;
+    top: 50%;
+    left: 50%;
+    
+    transform: translate(-50%, 0%);
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
-    opacity: 0.7;
-    mix-blend-mode: screen;
-    filter: brightness(1.1);
+    mix-blend-mode: lighten;
+    filter: blur(50px);
     z-index: 2;
+    pointer-events: none;
 }
 
 .bg-overlay {
@@ -144,13 +145,7 @@ video.bg-video:not(.background-combined .bg-video) {
     overflow: hidden;
 }
 
-.fire-particle {
-    position: absolute;
-    bottom: -50px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 100, 0, 0.8) 0%, rgba(255, 50, 0, 0.4) 30%, transparent 70%);
-    animation: fireFloat linear infinite;
-}
+
 
 @keyframes fireFloat {
     0% {
@@ -238,6 +233,7 @@ video.bg-video:not(.background-combined .bg-video) {
 }
 
 .home-title {
+    font-family: 'Henny Penny', cursive, sans-serif;
     font-size: 50px;
     font-weight: bold;
     letter-spacing: 3px;
@@ -245,21 +241,10 @@ video.bg-video:not(.background-combined .bg-video) {
     margin-bottom: 40px;
 }
 
-.scroll-box {
-    width: 80%;
-    max-width: 800px;
-    height: 40vh;
-    margin: 30px auto;
-    padding: 20px;
-    overflow-y: auto;
-    border: 3px solid rgba(255, 80, 80, 0.8);
-    backdrop-filter: blur(4px);
-    background: rgba(20, 0, 0, 0.4);
-    box-shadow: 0 0 20px red inset;
-    border-radius: 10px;
-}
+
 
 .scroll-box p {
+    font-family: cursive;
     line-height: 1.6;
     font-size: 1.1rem;
 }
@@ -308,6 +293,7 @@ video.bg-video:not(.background-combined .bg-video) {
     text-transform: uppercase;
     letter-spacing: 3px;
     text-shadow: 0 0 15px #ff1500;
+    font-family: 'Henny Penny', cursive, sans-serif;;
 }
 
 .events-grid {
@@ -682,9 +668,5 @@ video.bg-video:not(.background-combined .bg-video) {
     
     .bg-photo img {
         animation: subtleZoom 40s ease-in-out infinite alternate;
-    }
-    
-    .bg-video {
-        opacity: 0.5;
     }
 }
